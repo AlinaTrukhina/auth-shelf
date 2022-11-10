@@ -6,13 +6,13 @@ import { useHistory, Link } from 'react-router-dom';
 function ShelfPage() {
 
   const dispatch = useDispatch();
-  const shelf = useSelector((store) => store.shelf) 
-
+  const shelf = useSelector((store) => store.shelf);
+  const user = useSelector((store) => store.user);
   useEffect(() => {
 
     dispatch({
       type: "FETCH_SHELF"
-    })
+    });
 
   }, []);
 
@@ -35,7 +35,9 @@ function ShelfPage() {
           <li key={shelfItem.id}>
             {shelfItem.description}
             <img src={shelfItem.image_url} alt="" />
-            <button onClick={() => {deleteItem(shelfItem)}}>Delete</button>
+
+            {user.id === shelfItem.user_id && <button onClick={() => {deleteItem(shelfItem)}}>Delete</button>}
+              
           </li>
          
         ))}
