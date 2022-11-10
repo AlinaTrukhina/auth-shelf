@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import AddForm from '../AddForm/AddForm';
 
 function ShelfPage() {
 
@@ -28,6 +29,8 @@ function ShelfPage() {
 
   return (
     <div className="container">
+      <AddForm />
+
       <h2>Shelf</h2>
       <p>All of the available items can be seen here.</p>
       <ul>
