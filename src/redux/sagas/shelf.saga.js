@@ -22,8 +22,9 @@ function* fetchShelf() {
 }
 
 function* deleteItem(action) {
+    console.log('action payload???', action.payload);
     try {
-        yield axios.delete(`/api/shelf/${action.payload.id}`, action.payload)
+        yield axios.delete(`/api/shelf/${action.payload.id}`, {data: action.payload})
         
         yield put({
             type: 'FETCH_SHELF'

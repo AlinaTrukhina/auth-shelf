@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
-
+  console.log('req.user.id', req.user.id, req.body)
   if (req.user.id === req.body.user_id) {
     const queryText = `DELETE FROM "item" WHERE "id" = $1;`;
     const queryParams = [req.params.id];
