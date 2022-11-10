@@ -6,7 +6,7 @@ import { useHistory, Link } from 'react-router-dom';
 function ShelfPage() {
 
   const dispatch = useDispatch();
-  const shelf = useSelector((store) => store.shelf) //TODO: need to get shelf not store
+  const shelf = useSelector((store) => store.shelf) 
 
   useEffect(() => {
 
@@ -14,7 +14,16 @@ function ShelfPage() {
       type: "FETCH_SHELF"
     })
 
-  }, [])
+  }, []);
+
+  const deleteItem = (shelfItem) => {
+
+    dispatch({
+      type: 'DELETE_ITEM',
+      payload: shelfItem
+    });
+
+  }
 
 
   return (
@@ -26,6 +35,7 @@ function ShelfPage() {
           <li key={shelfItem.id}>
             {shelfItem.description}
             <img src={shelfItem.image_url} alt="" />
+            <button onClick={() => {deleteItem(shelfItem)}}>Delete</button>
           </li>
          
         ))}
