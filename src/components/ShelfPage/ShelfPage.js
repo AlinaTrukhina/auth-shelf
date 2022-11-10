@@ -6,7 +6,7 @@ import { useHistory, Link } from 'react-router-dom';
 function ShelfPage() {
 
   const dispatch = useDispatch();
-  const shelf = useSelector((store) => store) //TODO: need to get shelf not store
+  const shelf = useSelector((store) => store.shelf) //TODO: need to get shelf not store
 
   useEffect(() => {
 
@@ -24,9 +24,10 @@ function ShelfPage() {
       <ul>
         {shelf.map((shelfItem) => (
           <li key={shelfItem.id}>
-            <img src={shelfItem.image_url} />
             {shelfItem.description}
+            <img src={shelfItem.image_url} alt="" />
           </li>
+         
         ))}
       </ul>
     </div>
