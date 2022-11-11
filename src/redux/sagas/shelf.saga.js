@@ -4,20 +4,27 @@ import axios from 'axios';
 // worker Saga: will be fired on "REGISTER" actions
 function* fetchShelf() {
   try {
-    
 
-
-
-    //TODO: create a get route to get shelf items 
+    //create a get route to get shelf items 
    const shelfitems = yield axios.get('/api/shelf');
 
     // automatically log a user in after registration
     yield put({ type: 'SET_SHELF', payload: shelfitems.data });
-
-   
     
   } catch (error) {
     console.log('Error with getting items from shelf:', error);
+  }
+}
+
+function* addItem(action) {
+  try {
+    yield axios.post('/api/shelf', action.payload);
+
+    yield put({
+      type: 'FETCH_SHELF'
+  })
+  } catch (error) {
+    console.log('Error adding item to shelf:', error);
   }
 }
 
@@ -36,7 +43,8 @@ function* deleteItem(action) {
 
 function* shelfSaga() {
   yield takeLatest('FETCH_SHELF', fetchShelf);
-  yield takeLatest('DELETE_ITEM', deleteItem)
+  yield takeLatest('DELETE_ITEM', deleteItem);
+  yield takeLatest('ADD_ITEM', addItem);
 }
 
 export default shelfSaga;

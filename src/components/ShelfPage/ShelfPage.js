@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import AddForm from '../AddForm/AddForm';
@@ -9,6 +9,7 @@ function ShelfPage() {
   const dispatch = useDispatch();
   const shelf = useSelector((store) => store.shelf);
   const user = useSelector((store) => store.user);
+  
   useEffect(() => {
 
     dispatch({

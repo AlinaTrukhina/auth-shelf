@@ -27,10 +27,18 @@ router.get('/', (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
+  const sqlText = `INSERT INTO item ("description", "image_url", "user_id")
+                  VALUES ($1, 'https://picsum.photos/200/300', $2); ` ;
+  const sqlParams = [req.body.data, req.user.id];
 
-
-
-
+  pool.query(sqlText, sqlParams)
+  .then(result => {
+    res.sendStatus(201);
+  })
+  .catch(err => {
+    console.log('ERROR: post item', err);
+    res.sendStatus(500)
+  });
 
 });
 
